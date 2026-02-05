@@ -1,0 +1,22 @@
+{
+  "name": "natours",
+  "version": "1.0.0",
+  "description": "Learning node.js, express and mongoDB",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnaSad-front/natours-nodejs.git"
+  },
+  "author": "Ana Sad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnaSad-front/natours-nodejs/issues"
+  },
+  "homepage": "https://github.com/AnaSad-front/natours-nodejs#readme",
+  "dependencies": {
+    "express": "^4.22.1"
+  }
+}
