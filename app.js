@@ -2,17 +2,30 @@ const fs = require("fs");
 const express = require("express");
 
 const app = express();
-
 app.use(express.json()); // Middleware to parse JSON bodies in requests
+
+app.use((req, res, next) => {
+  console.log("Hello from the Middleware 👋");
+  next(); // Call the next middleware in the stack
+});
+
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString(); // Add a custom property to the request object
+  next();
+});
 
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`),
 );
 
 const getAllTours = (req, res) => {
-  res
-    .status(200)
-    .json({ status: "success", results: tours.length, data: { tours } });
+  console.log(req.requestTime);
+  res.status(200).json({
+    status: "success",
+    requestedAt: req.requestTime,
+    results: tours.length,
+    data: { tours },
+  });
 };
 
 const getTour = (req, res) => {
