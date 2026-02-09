@@ -10,6 +10,8 @@ const app = express();
 app.use(morgan("dev")); // Middleware for logging HTTP requests in development mode
 app.use(express.json()); // Middleware to parse JSON bodies in requests
 
+app.use(express.static(`${__dirname}/public`)); // Middleware to serve static files from the 'public' directory
+
 app.use((req, res, next) => {
   console.log("Hello from the Middleware 👋");
   next(); // Call the next middleware in the stack
