@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/AnaSad-front/natours-nodejs#readme",
   "dependencies": {
-    "express": "^4.22.1"
+    "express": "^4.22.1",
+    "morgan": "^1.10.1"
   }
 }
