@@ -7,9 +7,11 @@ const userRouter = require("./routes/userRoutes");
 const app = express();
 
 // 1) MIDDLEWARES
-app.use(morgan("dev")); // Middleware for logging HTTP requests in development mode
-app.use(express.json()); // Middleware to parse JSON bodies in requests
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
+app.use(express.json()); // Middleware to parse JSON bodies in requests
 app.use(express.static(`${__dirname}/public`)); // Middleware to serve static files from the 'public' directory
 
 app.use((req, res, next) => {

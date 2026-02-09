@@ -4,7 +4,8 @@
   "description": "Learning node.js, express and mongoDB",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start:dev": "nodemon server.js",
+    "start:prod": "NODE_ENV=production nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/AnaSad-front/natours-nodejs#readme",
   "dependencies": {
+    "dotenv": "^17.2.4",
     "express": "^4.22.1",
     "morgan": "^1.10.1"
   }
