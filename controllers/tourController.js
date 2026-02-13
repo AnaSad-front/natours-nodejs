@@ -16,7 +16,17 @@ exports.getAllTours = async (req, res) => {
     // gte-greater than or equal, gt-greater than, lte-less than or equal, lt-less than
     // 127.0.0.1:3000/api/v1/tours?duration[gte]=5&difficulty=easy&price[lt]=1500
 
-    const query = Tour.find(JSON.parse(queryStr));
+    let query = Tour.find(JSON.parse(queryStr));
+
+    // 2) Sorting
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(",").join(" ");
+      query = query.sort(sortBy);
+      // sort('price ratingsAverage')
+    } else {
+      query = query.sort("-createdAt");
+    }
+
     // EXECUTE QUERY
     const tours = await query;
 
