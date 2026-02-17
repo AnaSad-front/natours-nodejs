@@ -15,11 +15,6 @@ app.use(express.json()); // Middleware to parse JSON bodies in requests
 app.use(express.static(`${__dirname}/public`)); // Middleware to serve static files from the 'public' directory
 
 app.use((req, res, next) => {
-  console.log("Hello from the Middleware 👋");
-  next(); // Call the next middleware in the stack
-});
-
-app.use((req, res, next) => {
   req.requestTime = new Date().toISOString(); // Add a custom property to the request object
   next();
 });
@@ -28,5 +23,13 @@ app.use((req, res, next) => {
 // Mount the routers on the app
 app.use("/api/v1/tours", tourRouter);
 app.use("/api/v1/users", userRouter);
+
+// Handle all undefined routes (404 Not Found)
+app.all("*", (req, res, next) => {
+  res.status(404).json({
+    status: "fail",
+    message: `Can't find ${req.originalUrl} on this server!`,
+  });
+});
 
 module.exports = app;
