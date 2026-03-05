@@ -6,6 +6,7 @@ const router = express.Router({ mergeParams: true });
 
 // POST /tours/:tourId/reviews
 // or POST /reviews
+// GET /tours/:tourId/reviews
 
 router
   .route("/")
