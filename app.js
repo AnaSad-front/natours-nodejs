@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
@@ -13,7 +14,13 @@ const reviewRouter = require("./routes/reviewRoutes");
 
 const app = express();
 
+app.set("view engine", "pug"); // Set Pug as the view engine for rendering templates
+app.set("views", path.join(__dirname, "views")); // Set the directory for Pug templates
+
 // 1) GLOBAL MIDDLEWARES
+// Serving static files
+app.use(express.static(path.join(__dirname, "public"))); // Middleware to serve static files from the 'public' directory
+
 // Set security HTTP headers
 app.use(helmet()); // Middleware to set security-related HTTP headers
 
@@ -50,9 +57,6 @@ app.use(
   }),
 );
 
-// Serving static files
-app.use(express.static(`${__dirname}/public`)); // Middleware to serve static files from the 'public' directory
-
 // Test middleware
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString(); // Add a custom property to the request object
@@ -62,6 +66,10 @@ app.use((req, res, next) => {
 });
 
 // 3) ROUTES
+app.get("/", (req, res) => {
+  res.status(200).render("base");
+});
+
 // Mount the routers on the app
 app.use("/api/v1/tours", tourRouter);
 app.use("/api/v1/users", userRouter);
